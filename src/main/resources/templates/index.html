@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный дом</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="background"></div>
+
+<div class="container">
+    <header class="header">
+        <h1>Умный дом</h1>
+        <p>Панель управления состоянием системы</p>
+    </header>
+
+    <main class="dashboard">
+        <div class="card">
+            <div class="card-icon">🌡️</div>
+            <h2>Температура радиатора</h2>
+            <p class="value" th:text="${temperature} + ' °C'">value</p>
+            <p class="description">Текущая температура системы отопления</p>
+
+            <form th:action="@{/temperature}" method="post" class="control-form">
+                <label for="temperature" class="form-label">Установить температуру</label>
+                <input
+                        type="number"
+                        id="temperature"
+                        name="temperature"
+                        min="10"
+                        max="40"
+                        class="form-input"
+                        placeholder="Введите от 10 до 40"
+                        required>
+                <button type="submit" class="btn">Применить</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🪟</div>
+            <h2>Состояние штор</h2>
+            <p class="value" th:text="${curtains}">Открыты</p>
+            <p class="description">Текущее положение штор в доме</p>
+
+            <form th:action="@{/curtains}" method="post" class="control-form">
+                <label for="curtainStatus" class="form-label">Изменить состояние штор</label>
+
+                <select id="curtainStatus" name="curtainStatus" class="form-input" required>
+                    <option value="" disabled selected>Выберите состояние</option>
+                    <option th:each="status : ${curtainsStatuses}"
+                            th:value="${status}"
+                            th:text="${status}">
+                        OPEN
+                    </option>
+                </select>
+
+                <button type="submit" class="btn">Сохранить</button>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>
