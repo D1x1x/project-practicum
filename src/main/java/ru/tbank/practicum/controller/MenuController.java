@@ -2,6 +2,7 @@ package ru.tbank.practicum.controller;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import java.awt.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,19 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.tbank.practicum.Other.CurtainsStatus;
 import ru.tbank.practicum.service.MenuService;
 
-import java.awt.*;
-
 @Controller
 public class MenuController {
-
-
 
     private final MenuService menuService;
 
     public MenuController(MenuService menuService) {
         this.menuService = menuService;
     }
-
 
     @GetMapping("/")
     public String index(Model model) {
@@ -31,7 +27,6 @@ public class MenuController {
         model.addAttribute("curtainsStatuses", CurtainsStatus.values());
         return "index";
     }
-
 
     @PostMapping("/temperature")
     public String post(@RequestParam @Min(10) @Max(40) int temperature) {
@@ -44,6 +39,4 @@ public class MenuController {
         menuService.setCurtainsStatus(curtainStatus);
         return "redirect:/";
     }
-
-
 }
