@@ -1,4 +1,4 @@
-package ru.tbank.practicum;
+package ru.tbank.practicum;//практикум
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
